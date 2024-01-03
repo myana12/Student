@@ -1,0 +1,58 @@
+import random
+
+box = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+def tictactoe(box):
+    for row in box:
+        for element in row:
+            print(f'{element} |', end=' ')
+        print('\n----------')
+
+tictactoe(box)
+def playtic():
+    while True:
+        user1=int(input("enter no1"))
+        replace(box,user1,'x')
+        tictactoe(box)
+        if winner(box,'x'):
+            print("x wins")
+            break
+        if allthing(box):
+            print('tie')
+            break
+        user2=int(input("enter no2"))
+        replace(box,user2,'0')
+        tictactoe(box)
+        if winner(box,'0'):
+            print("0 wins")
+            break
+def replace(box, user,symbol):
+    for i in range(len(box)):
+        for j in range(len(box[i])):
+            if user == box[i][j]:
+                box[i][j] = symbol
+                return
+def winner(box,symbol):
+    for row in range(3):
+        if all(box[row][col]==symbol for col in range(3)):
+            return True
+        elif all(box[row][col]==symbol for col in range(3)):
+            return True
+    for col in range(3):
+        if all(box[col][row]==symbol for row in range(3)):
+            return True
+        elif all(box[col][row]==symbol for row in range(3)):
+            return True
+    if all(box[i][i] == symbol for i in range(3)) or all(box[i][2 - i] == symbol for i in range(3)):
+            return True
+    elif all(box[i][i] == symbol for i in range(3)) or all(box[i][2 - i] == symbol for i in range(3)):
+            return True
+    return False
+def allthing(box):
+    return all(cell == 'x' or cell == '0' for row in box for cell in row)
+playtic()
+
